@@ -1,0 +1,202 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #f8fafc;
+  --thai-orange: #f97316;
+  --thai-teal: #0d9488;
+  --thai-gold: #d97706;
+  --thai-sand: #fffbeb;
+  --thai-deep: #0f172a;
+  --surface: #ffffff;
+  --border: #e2e8f0;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  background: var(--bg);
+  color: var(--thai-deep);
+  font-family: "Heebo", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Subtle ambient Thai texture — soft, low-contrast */
+body {
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(1200px 600px at 100% 0%, rgba(13, 148, 136, 0.06), transparent 60%),
+    radial-gradient(1000px 500px at 0% 100%, rgba(249, 115, 22, 0.05), transparent 55%);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+@layer components {
+  .card {
+    @apply bg-white rounded-2xl shadow-sm border border-slate-200/70 transition-all duration-200;
+  }
+  .card:hover {
+    @apply shadow-md border-slate-300/70 -translate-y-0.5;
+  }
+  .btn {
+    @apply px-4 py-2 rounded-xl font-medium transition-all duration-150 active:scale-95;
+  }
+  .btn-primary {
+    @apply bg-thai-teal text-white hover:bg-teal-700 shadow-sm;
+  }
+  .btn-ghost {
+    @apply bg-white text-slate-700 hover:bg-slate-50 border border-slate-200;
+  }
+  .input {
+    @apply border border-slate-300 rounded-xl p-2.5 text-sm w-full bg-white focus:outline-none focus:ring-2 focus:ring-thai-teal/30 focus:border-thai-teal transition;
+  }
+}
+
+/* DARK MODE */
+.dark body {
+  background-color: #0b1220;
+  background-image:
+    radial-gradient(1200px 600px at 100% 0%, rgba(13, 148, 136, 0.12), transparent 60%),
+    radial-gradient(1000px 500px at 0% 100%, rgba(249, 115, 22, 0.10), transparent 55%);
+  color: #e2e8f0;
+}
+.dark .card {
+  @apply bg-slate-800/80 border-slate-700 text-slate-100 backdrop-blur-sm;
+}
+.dark .card:hover {
+  @apply shadow-lg shadow-black/40 border-slate-600;
+}
+.dark .input {
+  @apply bg-slate-900 border-slate-600 text-slate-100;
+}
+.dark .btn-ghost {
+  @apply bg-slate-800 text-slate-100 border-slate-600 hover:bg-slate-700;
+}
+.dark .text-thai-deep {
+  color: #f1f5f9;
+}
+.dark .text-gray-500, .dark .text-gray-600, .dark .text-gray-700 {
+  color: #94a3b8;
+}
+
+/* hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+input,
+textarea,
+select {
+  font-family: inherit;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid #0d9488;
+  outline-offset: -1px;
+  border-color: transparent;
+}
+
+/* Entrance animation */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up {
+  animation: fadeUp 0.35s ease-out both;
+}
+
+/* Staggered list entrance — cards fade in one after another */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.stagger > * {
+  animation: fadeIn 0.4s ease-out both;
+}
+.stagger > *:nth-child(1) { animation-delay: 0.04s; }
+.stagger > *:nth-child(2) { animation-delay: 0.08s; }
+.stagger > *:nth-child(3) { animation-delay: 0.12s; }
+.stagger > *:nth-child(4) { animation-delay: 0.16s; }
+.stagger > *:nth-child(5) { animation-delay: 0.20s; }
+.stagger > *:nth-child(6) { animation-delay: 0.24s; }
+.stagger > *:nth-child(7) { animation-delay: 0.28s; }
+.stagger > *:nth-child(8) { animation-delay: 0.32s; }
+
+/* Smooth tab content transition */
+.tab-fade {
+  animation: fadeIn 0.25s ease-out both;
+}
+
+/* FAB attention pulse */
+@keyframes fabPulse {
+  0%, 100% { box-shadow: 0 4px 14px rgba(13, 148, 136, 0.35); }
+  50% { box-shadow: 0 4px 22px rgba(13, 148, 136, 0.6); }
+}
+.fab-pulse { animation: fabPulse 2s ease-in-out infinite; }
+
+/* Toast slide-in from top */
+@keyframes toastIn {
+  from { opacity: 0; transform: translate(-50%, -12px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+.animate-toast { animation: toastIn 0.3s ease-out both; }
+
+/* Tab bar active indicator slide */
+.tab-indicator {
+  transition: all 0.2s ease;
+}
+
+/* Button press feedback already via active:scale-95 */
+
+/* Header — calm, professional, with a subtle teal accent */
+.app-header {
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  border-bottom: 1px solid #e2e8f0;
+  border-radius: 0 0 1.75rem 1.75rem;
+  padding: 1.75rem 1rem 1.5rem;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 8px 24px rgba(15, 23, 42, 0.04);
+}
+.dark .app-header {
+  background: linear-gradient(180deg, #0f172a 0%, #0b1220 100%);
+  border-bottom: 1px solid #1e293b;
+  box-shadow: none;
+}
+.app-header h1 {
+  color: #0f172a;
+  letter-spacing: -0.02em;
+}
+.dark .app-header h1 {
+  color: #f8fafc;
+}
+.app-header p {
+  color: #64748b;
+}
+.dark .app-header p {
+  color: #94a3b8;
+}
+
+/* Accent underline for the title */
+.app-header h1 span.flag {
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+/* Scroll hint — gentle bounce to indicate more content below */
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+.scroll-hint {
+  animation: scrollBounce 1.6s ease-in-out infinite;
+}
+
+@media print {
+  .no-print { display: none !important; }
+  body { background: white; }
+}
